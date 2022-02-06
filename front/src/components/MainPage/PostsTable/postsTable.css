@@ -1,0 +1,52 @@
+.portTableDiv {
+  width: 80%;
+  margin: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .portTableDiv {
+    width: 94%;
+  }
+
+  .portTable thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    text-align: right;
+  }
+
+  .portTable tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  .portTable td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+    word-break: break-word;
+    text-align: left;
+  }
+
+  .portTable td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .portTable td:last-child {
+    border-bottom: 0;
+  }
+}

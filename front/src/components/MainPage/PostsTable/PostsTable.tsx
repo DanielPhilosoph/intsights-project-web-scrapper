@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
+import "./postsTable.css";
+
 import { updateData } from "../../../reduxActions/actions";
 
 export default function PostsTable() {
@@ -17,8 +18,8 @@ export default function PostsTable() {
     getPosts();
   }, []);
   return (
-    <div>
-      <Table striped bordered hover>
+    <div className="portTableDiv">
+      <Table className="portTable" striped bordered hover responsive="xl">
         <thead>
           <tr>
             {state.data && state.data[0] !== undefined
