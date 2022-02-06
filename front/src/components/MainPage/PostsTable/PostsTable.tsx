@@ -6,16 +6,22 @@ import { Dispatch } from "redux";
 import "./postsTable.css";
 
 import { updateData } from "../../../reduxActions/actions";
+import { socket } from "../../../socket/socket";
 
 export default function PostsTable() {
   const state: StateType = useSelector((state: StateType) => state);
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
-    async function getPosts() {
-      updateData(dispatch);
-    }
-    getPosts();
+    socket.on("strongW2ise", (data) => {
+      console.log(data);
+
+      if (!data.error) {
+        updateData(dispatch, data.data);
+      } else {
+        console.log(data.error);
+      }
+    });
   }, []);
   return (
     <div className="portTableDiv">

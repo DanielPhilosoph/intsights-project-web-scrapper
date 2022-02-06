@@ -10,14 +10,14 @@ import Swal from "sweetalert2";
  ** Void function
  ** Sends API request for the search - updates state
  */
-export async function updateData(dispatch: Dispatch<any>) {
+export async function updateData(
+  dispatch: Dispatch<any>,
+  data: [StrongW2iseType]
+) {
   try {
-    const response = await axios.get(`http://localhost:3004/strongerW2ise`);
-    console.log(response.data.data);
-
     const action = {
       type: UPDATE_DATA,
-      payload: response.data.data,
+      payload: data,
     };
     dispatch(action);
   } catch (error) {
