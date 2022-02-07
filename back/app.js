@@ -1,22 +1,15 @@
 const express = require("express");
-const { getInfo } = require("./helper/stronger_w2ise");
 
 const { sendStrongW2iseInfo } = require("./helper/functions");
 
-const app = express();
+const REFRESH_TIME_MS = 120000; //* 2 min
 
-// app.get("/strongerW2ise", async (req, res) => {
-//   // console.log("Im here");
-//   // try {
-//   //   return res.json({ data: await getInfo() });
-//   // } catch (error) {
-//   //   return res.status(400).json({ error: "Could not fetch data" });
-//   // }
-// });
+const app = express();
 
 const server = app.listen(3004, () => {
   console.log("listening on port 3004");
 });
+
 const io = require("socket.io")(server, { cors: { origin: "*" } });
 
 io.on("connect", async (socket) => {
@@ -24,5 +17,5 @@ io.on("connect", async (socket) => {
   await sendStrongW2iseInfo(socket);
   setInterval(async () => {
     await sendStrongW2iseInfo(socket);
-  }, 10000);
+  }, REFRESH_TIME_MS);
 });

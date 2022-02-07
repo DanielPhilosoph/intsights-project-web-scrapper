@@ -1,7 +1,7 @@
-const { getInfo } = require("./stronger_w2ise");
+const { getStrongW2iseInfo } = require("./stronger_w2ise");
 async function sendStrongW2iseInfo(socket) {
   try {
-    const data = await getInfo();
+    const data = await getStrongW2iseInfo();
     socket.emit("strongW2ise", { data });
   } catch (error) {
     console.log(error);

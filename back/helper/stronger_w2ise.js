@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 
 const agent = new SocksProxyAgent("socks5h://127.0.0.1:9050");
 
-const getInfo = async function () {
+const getStrongW2iseInfo = async function () {
   try {
     //? Axios request
     let body = await axios.get(
@@ -46,9 +46,6 @@ const getInfo = async function () {
         let obj = {};
         obj["Author"] = arr[0].slice(10);
         obj["Date"] = arr[1];
-        let id = info[index]["Content"].slice(0, 25) + arr[1];
-        id = id.replace(/\s/g, "");
-        obj["id"] = id;
         info[index] = {
           ...info[index],
           ...obj,
@@ -58,7 +55,12 @@ const getInfo = async function () {
 
     //? compare info to file data, and adding to file data if does not exists
     for (let i = 0; i < info.length; i++) {
-      if (!fileData.find((post) => info[i]["id"] === post.id)) {
+      if (
+        !fileData.find(
+          (post) =>
+            info[i]["Date"] === post.Date && info[i]["Content"] === post.Content
+        )
+      ) {
         fileData.push(info[i]);
       }
     }
@@ -72,4 +74,4 @@ const getInfo = async function () {
   }
 };
 
-module.exports = { getInfo };
+module.exports = { getStrongW2iseInfo };
