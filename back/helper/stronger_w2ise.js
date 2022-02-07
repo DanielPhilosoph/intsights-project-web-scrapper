@@ -3,6 +3,8 @@ const axios = require("axios");
 const fs = require("fs");
 const cheerio = require("cheerio");
 
+const { getPostByType, addPosts } = require("../mongo/functions/queries");
+
 const agent = new SocksProxyAgent("socks5h://127.0.0.1:9050");
 
 const getStrongW2iseInfo = async function () {
@@ -13,12 +15,8 @@ const getStrongW2iseInfo = async function () {
       { httpAgent: agent }
     );
 
-    //? get all data from file
-    const rawData = fs.readFileSync("./assets/stronger_w2ise.json");
-    let fileData = [];
-    if (rawData.length !== 0) {
-      fileData = JSON.parse(rawData);
-    }
+    //? get all data from db
+    const dbDate = await getPostByType("strongW2ise");
 
     //? set up
     const $ = cheerio.load(body.data);
@@ -27,7 +25,8 @@ const getStrongW2iseInfo = async function () {
     //? get all Titles, push to array
     $("div.row > .col-sm-12 > .pre-header").each((index, element) => {
       info.push({
-        Title: $(element).text().replace(/\s\s+/g, "").slice(0, -10),
+        type: "strongW2ise",
+        title: $(element).text().replace(/\s\s+/g, "").slice(0, -10),
       });
     });
 
@@ -35,7 +34,7 @@ const getStrongW2iseInfo = async function () {
     $("div.row > .col-sm-12 > .pre").each((index, element) => {
       info[index] = {
         ...info[index],
-        Content: $(element).text().replace(/\s\s+/g, ""),
+        content: $(element).text().replace(/\s\s+/g, ""),
       };
     });
 
@@ -44,8 +43,8 @@ const getStrongW2iseInfo = async function () {
       (index, element) => {
         let arr = $(element).text().replace(/\s\s+/g, "").split(" at ");
         let obj = {};
-        obj["Author"] = arr[0].slice(10);
-        obj["Date"] = arr[1];
+        obj["author"] = arr[0].slice(10);
+        obj["date"] = arr[1];
         info[index] = {
           ...info[index],
           ...obj,
@@ -53,21 +52,23 @@ const getStrongW2iseInfo = async function () {
       }
     );
 
-    //? compare info to file data, and adding to file data if does not exists
+    //? find new posts and add to db
+    const newPosts = [];
     for (let i = 0; i < info.length; i++) {
       if (
-        !fileData.find(
+        !dbDate.find(
           (post) =>
-            info[i]["Date"] === post.Date && info[i]["Content"] === post.Content
+            info[i]["date"] === post.date && info[i]["content"] === post.content
         )
       ) {
-        fileData.push(info[i]);
+        newPosts.push(info[i]);
+        dbDate.push(info[i]);
       }
     }
+    await addPosts(newPosts);
 
-    fs.writeFileSync("./assets/stronger_w2ise.json", JSON.stringify(fileData));
-    console.log(fileData.length);
-    return fileData;
+    console.log(dbDate.length);
+    return dbDate;
   } catch (error) {
     console.log(error);
     throw "Could not get data";

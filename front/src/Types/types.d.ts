@@ -8,11 +8,10 @@ type DispatchType = (args: ActionType) => ActionType;
 
 //* StrongW2ise object type
 type StrongW2iseType = {
-  Title: string;
-  Content: string;
-  Author: string;
-  Date: string;
-  id: string;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
 };
 
 //* Data type

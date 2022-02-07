@@ -24,36 +24,33 @@ export default function PostsTable() {
       }
     });
   }, []);
-  console.log(state.data && state.data[0] ? state.data[0]["Content"] : "");
-  const tbodyRender = state.data
-    ? state.data.map((post) => {
-        const keys = Object.keys(post);
-        const values = Object.values(post);
 
-        return (
-          <tr key={post.Date + post.Title}>
-            {keys.map((key, i) => {
-              if (key === "Date") {
-                console.log(formatDate(post[key]).date);
-
-                if (formatDate(post[key]).date) {
-                  //* If managed to format
-                  return (
-                    <td key={post.Date + i}>{formatDate(post[key]).date}</td>
-                  );
-                }
-                return <td key={post.Date + i}>{post[key]}</td>;
-              }
-              return (
-                <td key={post.Date + i}>
-                  <span className="tbodyTDSpan">{values[i]}</span>
-                </td>
-              );
-            })}
-          </tr>
-        );
-      })
-    : "";
+  let tbodyRender;
+  if (state.data) {
+    tbodyRender = state.data.map((post) => {
+      const keys = Object.keys(post);
+      const values = Object.values(post);
+      let tdValue: string = "";
+      return (
+        <tr key={post.date + post.title}>
+          {keys.map((key, i) => {
+            if (key === "date") {
+              const formattedDate = formatDate(post[key]).date;
+              //* Date formatting
+              tdValue = formattedDate !== undefined ? formattedDate : post[key];
+            } else {
+              tdValue = values[i];
+            }
+            return (
+              <td key={post.date + i}>
+                <span className="tbodyTDSpan">{tdValue}</span>
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
+  }
 
   return (
     <div className="portTableDiv">
