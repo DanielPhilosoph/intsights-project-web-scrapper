@@ -1,4 +1,4 @@
-.portTableDiv {
+.postTableDiv {
   width: 80%;
   margin: auto;
 }
@@ -7,8 +7,12 @@
   white-space: pre-line;
 }
 
+.postTableTh {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 500px) {
-  .portTableDiv {
+  .postTableDiv {
     width: 94%;
   }
 

@@ -1,6 +1,8 @@
-import { UPDATE_DATA, RESET_DATA } from "../Types/actionConsts";
+import { isDataType, isString } from "../helper/functions";
+import { UPDATE_DATA, RESET_DATA, CHANGE_SEARCH } from "../Types/actionConsts";
 const initialize: InitialStateType = {
   data: [],
+  search: "",
 };
 
 export default function mainReducer(
@@ -11,13 +13,19 @@ export default function mainReducer(
     case UPDATE_DATA:
       if (action.payload !== undefined) {
         return {
-          data: action.payload,
+          ...state,
+          data: isDataType(action.payload) ? action.payload : state.data,
         };
       } else {
         return state;
       }
     case RESET_DATA:
-      return { data: [] };
+      return { data: [], search: "" };
+    case CHANGE_SEARCH:
+      return {
+        ...state,
+        search: isString(action.payload) ? action.payload : state.search,
+      };
     default:
       return state;
   }

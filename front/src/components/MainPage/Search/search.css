@@ -1,0 +1,12 @@
+.searchDiv {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  display: flex;
+  margin: auto;
+  width: 50%;
+  border-radius: 5px;
+  border: 0.1px solid gray;
+  align-items: center;
+}

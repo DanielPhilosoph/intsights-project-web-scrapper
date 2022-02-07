@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { UPDATE_DATA } from "../Types/actionConsts";
+import { CHANGE_SEARCH, UPDATE_DATA } from "../Types/actionConsts";
 import Swal from "sweetalert2";
 
 /**
@@ -28,4 +28,12 @@ export async function updateData(
       timer: 1500,
     });
   }
+}
+
+export function updateSearch(dispatch: Dispatch<any>, searchString: string) {
+  const action = {
+    type: CHANGE_SEARCH,
+    payload: searchString,
+  };
+  dispatch(action);
 }
