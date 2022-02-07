@@ -6,7 +6,7 @@ import MainPage from "./components/MainPage/MainPage";
 import NavBar from "./components/NavBar";
 import { updateData } from "./reduxActions/actions";
 
-const REFRESH_TIME_MS = 5000;
+const REFRESH_TIME_MS = 120000;
 
 function App() {
   const dispatch: Dispatch<any> = useDispatch();
