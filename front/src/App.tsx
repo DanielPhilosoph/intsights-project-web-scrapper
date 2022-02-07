@@ -21,22 +21,20 @@ function App() {
       }
     }
     getPosts();
-  }, []);
-  let counter = 0;
-  setInterval(async () => {
-    async function x() {
-      try {
-        const response = await axios.get("http://localhost:3004/strongW2ise");
-        updateData(dispatch, response.data.data);
-        console.log("updated");
-        counter++;
-        console.log("counter: " + counter);
-      } catch (error) {
-        console.log(error);
+
+    setInterval(async () => {
+      async function x() {
+        try {
+          const response = await axios.get("http://localhost:3004/strongW2ise");
+          updateData(dispatch, response.data.data);
+          console.log("updated");
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
-    await x();
-  }, REFRESH_TIME_MS);
+      await x();
+    }, REFRESH_TIME_MS);
+  }, []);
 
   return (
     <div className="App">
