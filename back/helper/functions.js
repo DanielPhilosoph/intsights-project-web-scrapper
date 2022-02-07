@@ -1,12 +1,13 @@
+const { addPosts } = require("../mongo/functions/queries");
 const { getStrongW2iseInfo } = require("./stronger_w2ise");
-async function sendStrongW2iseInfo(socket) {
+async function updatedDatabaseStrongW2ise() {
   try {
-    const data = await getStrongW2iseInfo();
-    socket.emit("strongW2ise", { data });
+    const { newPosts } = await getStrongW2iseInfo();
+    await addPosts(newPosts);
+    console.log("updated");
   } catch (error) {
     console.log(error);
-    socket.emit("strongW2ise", { error: "Could not fetch data" });
   }
 }
 
-module.exports = { sendStrongW2iseInfo };
+module.exports = { updatedDatabaseStrongW2ise };

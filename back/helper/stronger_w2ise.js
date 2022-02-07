@@ -65,10 +65,9 @@ const getStrongW2iseInfo = async function () {
         dbDate.push(info[i]);
       }
     }
-    await addPosts(newPosts);
 
     console.log(dbDate.length);
-    return dbDate;
+    return { posts: dbDate, newPosts };
   } catch (error) {
     console.log(error);
     throw "Could not get data";

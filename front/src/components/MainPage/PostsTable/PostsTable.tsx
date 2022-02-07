@@ -1,29 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 import "./postsTable.css";
 
-import { updateData } from "../../../reduxActions/actions";
-import { socket } from "../../../socket/socket";
 import { formatDate } from "../../../helper/functions";
 
 export default function PostsTable() {
   const state: StateType = useSelector((state: StateType) => state);
-  const dispatch: Dispatch<any> = useDispatch();
-
-  useEffect(() => {
-    socket.on("strongW2ise", (data) => {
-      console.log(data);
-
-      if (!data.error) {
-        updateData(dispatch, data.data);
-      } else {
-        console.log(data.error);
-      }
-    });
-  }, []);
 
   let tbodyRender;
   if (state.data) {

@@ -9,7 +9,7 @@ const router = express.Router();
  ** /strongW2ise route
  */
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const data = await getPostByType("strongW2ise");
     return res.json({ data: data });

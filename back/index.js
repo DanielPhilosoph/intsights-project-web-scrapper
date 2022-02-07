@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 //* ------ Imports ------
+const app = require("./app");
 const { PORT } = require("./config/config");
 const env = process.env.NODE_ENV || "production";
 const MONGO_URI =
