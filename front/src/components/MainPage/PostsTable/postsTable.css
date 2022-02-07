@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+.tbodyTDSpan {
+  white-space: pre-line;
+}
+
 @media screen and (max-width: 500px) {
   .portTableDiv {
     width: 94%;

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Dispatch } from "redux";
 import { UPDATE_DATA } from "../Types/actionConsts";
 import Swal from "sweetalert2";
