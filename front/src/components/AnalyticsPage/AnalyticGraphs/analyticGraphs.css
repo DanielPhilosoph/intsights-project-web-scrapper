@@ -1,0 +1,11 @@
+.dateInputAnalytics {
+  width: 200px;
+  border-radius: 5px;
+  border: 0.1px solid gray;
+}
+
+@media screen and (max-width: 500px) {
+  .dateInputAnalytics {
+    width: 150px;
+  }
+}

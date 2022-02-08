@@ -13,6 +13,8 @@ type StrongW2iseType = {
   content: string;
   author: string;
   date: string;
+  sentimentScore: number;
+  id: string;
 };
 
 //* Data type

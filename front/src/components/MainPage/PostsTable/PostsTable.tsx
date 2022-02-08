@@ -21,6 +21,8 @@ export default function PostsTable() {
               return new Date(b.date).getTime() - new Date(a.date).getTime();
             }),
           ]);
+          console.log(data.length);
+
           break;
         case "author":
           setData((prevData) => [
@@ -70,17 +72,26 @@ export default function PostsTable() {
               post.title.toLowerCase().includes(state.search.toLowerCase()) ||
               post.content.toLowerCase().includes(state.search.toLowerCase())
           );
+    //? At first render, filter by date
+    if (data.length === 0) {
+      dataToRender = [
+        ...dataToRender.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }),
+      ];
+    }
 
     //* Render data
     tbodyRender = dataToRender.map((post) => {
       const keys = Object.keys(post);
       const values = Object.values(post);
-      let tdValue: string = "";
+      let tdValue: string | number;
       return (
-        <tr key={post.date + post.title}>
+        <tr key={post.id + post.title}>
           {keys.map((key, i) => {
             //? Dont show sentimentScore
             if (key === "sentimentScore") return "";
+            if (key === "id") return "";
             if (key === "date") {
               const formattedDate = formatDate(post[key]).date;
               //* Date formatting
@@ -89,7 +100,7 @@ export default function PostsTable() {
               tdValue = values[i];
             }
             return (
-              <td key={post.date + i}>
+              <td key={post.id + i}>
                 <span className="tbodyTDSpan">{tdValue}</span>
               </td>
             );
@@ -108,6 +119,7 @@ export default function PostsTable() {
               ? Object.keys(state.data[0]).map((key) => {
                   //? Dont show sentimentScore
                   if (key === "sentimentScore") return "";
+                  if (key === "id") return "";
                   return (
                     <th key={key} className="postTableTh" onClick={onThClick}>
                       {key}
