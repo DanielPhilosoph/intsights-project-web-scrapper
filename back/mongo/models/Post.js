@@ -21,6 +21,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  sentimentScore: {
+    type: Number,
+    require: true,
+  },
 });
 
 module.exports = mongoose.model("Post", postSchema);

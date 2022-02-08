@@ -1,6 +1,9 @@
 const express = require("express");
 
-const { updatedDatabaseStrongW2ise } = require("./helper/functions");
+const {
+  updatedDatabaseStrongW2ise,
+  updateAllWithSentiment,
+} = require("./helper/functions");
 const { REFRESH_TIME_MS } = require("./config/config");
 
 const strongW2iseRouter = require("./routes/strongW2ise");

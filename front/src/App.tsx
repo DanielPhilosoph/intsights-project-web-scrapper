@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MainPage from "./components/MainPage/MainPage";
 import NavBar from "./components/NavBar";
 import { updateData } from "./reduxActions/actions";
+import AnalyticsPage from "./components/AnalyticsPage/AnalyticsPage";
 
 const REFRESH_TIME_MS = 120000;
 
@@ -38,8 +41,13 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      <MainPage />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

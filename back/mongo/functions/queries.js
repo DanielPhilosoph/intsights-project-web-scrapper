@@ -23,6 +23,7 @@ async function getPostByType(type) {
         content: post.content,
         author: post.author,
         date: post.date,
+        sentimentScore: post.sentimentScore,
       };
     });
     return arrangedPosts;
