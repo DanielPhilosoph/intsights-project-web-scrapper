@@ -79,6 +79,8 @@ export default function PostsTable() {
       return (
         <tr key={post.date + post.title}>
           {keys.map((key, i) => {
+            //? Dont show sentimentScore
+            if (key === "sentimentScore") return "";
             if (key === "date") {
               const formattedDate = formatDate(post[key]).date;
               //* Date formatting
@@ -104,6 +106,8 @@ export default function PostsTable() {
           <tr>
             {state.data && state.data[0] !== undefined
               ? Object.keys(state.data[0]).map((key) => {
+                  //? Dont show sentimentScore
+                  if (key === "sentimentScore") return "";
                   return (
                     <th key={key} className="postTableTh" onClick={onThClick}>
                       {key}
