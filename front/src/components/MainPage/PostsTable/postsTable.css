@@ -16,7 +16,49 @@
   background-color: rgb(223, 223, 223);
 }
 
+.pagination {
+  max-width: 200px;
+  width: 40vw;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+}
+
+.pagination li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pagination a {
+  border-radius: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: rgb(46, 46, 46);
+  font-weight: 600;
+}
+
+.pagination a:hover {
+  border: none;
+  background-color: rgb(156, 156, 156);
+  cursor: pointer;
+}
+
+.active a {
+  border: none;
+  background-color: rgb(156, 156, 156);
+}
+
 @media screen and (max-width: 500px) {
+  .pagination a {
+    padding: 6px;
+  }
+
   .postTableDiv {
     width: 93%;
   }
