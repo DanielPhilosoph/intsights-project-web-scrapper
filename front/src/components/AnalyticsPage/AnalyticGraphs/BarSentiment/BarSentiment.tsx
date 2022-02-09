@@ -13,9 +13,7 @@ import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import {
   getHours,
-  getNegativePostsByHourADay,
-  getPositivePostsByHourADay,
-  getNeutralPostsByHourADay,
+  getSentimentalPostsByHourADay,
   formatDateTo_DD_MM_YYYY,
 } from "../../../../helper/functions";
 
@@ -37,26 +35,29 @@ export default function BarSentiment({ date }: props) {
     Title
   );
 
+  const { negativeArray, positiveArray, neutralArray } =
+    getSentimentalPostsByHourADay(state.data, date);
+
   const data = {
     labels: getHours(),
     datasets: [
       {
         label: "Negative",
-        data: getNegativePostsByHourADay(state.data, date),
+        data: negativeArray,
         borderWidth: 2,
         backgroundColor: ["rgb(220,20,60)"],
         borderColor: ["rgba(220,20,60, 0.5)"],
       },
       {
         label: "Positive",
-        data: getPositivePostsByHourADay(state.data, date),
+        data: positiveArray,
         borderWidth: 2,
         backgroundColor: ["rgb(0,128,0)"],
         borderColor: ["rgba(0,128,0, 0.5)"],
       },
       {
         label: "Neutral",
-        data: getNeutralPostsByHourADay(state.data, date),
+        data: neutralArray,
         borderWidth: 2,
         backgroundColor: ["gray"],
       },

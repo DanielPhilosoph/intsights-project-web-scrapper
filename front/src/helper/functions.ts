@@ -81,52 +81,24 @@ export function getNumbersArray(start: number, end: number) {
   }
   return array;
 }
-export function getNegativePostsByHourADay(
+export function getSentimentalPostsByHourADay(
   posts: [] | [StrongW2iseType],
   day: Date
 ) {
   const postArray = getPostsFromDay(posts, day);
 
-  let array = new Array(24).fill(0);
+  let negativeArray = new Array(24).fill(0);
+  let positiveArray = new Array(24).fill(0);
+  let neutralArray = new Array(24).fill(0);
   postArray.forEach((post) => {
     let index = new Date(post.date).getHours();
-    if (post.sentimentScore < 0) array[index] += 1;
+    if (post.sentimentScore < 0) negativeArray[index] += 1;
+    if (post.sentimentScore > 0) positiveArray[index] += 1;
+    if (post.sentimentScore === 0) neutralArray[index] += 1;
   });
 
-  return array;
+  return { negativeArray, positiveArray, neutralArray };
 }
-
-//! MAKE IT 1 FUNCTION THAT RETURNS EVERY ARRAY
-export function getPositivePostsByHourADay(
-  posts: [] | [StrongW2iseType],
-  day: Date
-) {
-  const postArray = getPostsFromDay(posts, day);
-
-  let array = new Array(24).fill(0);
-  postArray.forEach((post) => {
-    let index = new Date(post.date).getHours();
-    if (post.sentimentScore > 0) array[index] += 1;
-  });
-
-  return array;
-}
-
-export function getNeutralPostsByHourADay(
-  posts: [] | [StrongW2iseType],
-  day: Date
-) {
-  const postArray = getPostsFromDay(posts, day);
-
-  let array = new Array(24).fill(0);
-  postArray.forEach((post) => {
-    let index = new Date(post.date).getHours();
-    if (post.sentimentScore === 0) array[index] += 1;
-  });
-
-  return array;
-}
-//! --------------------------------------------------------------
 
 export function getSentimentScoreBar(posts: [] | [StrongW2iseType]) {
   let map: { [key: string]: number } = {};
