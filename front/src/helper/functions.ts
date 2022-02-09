@@ -96,6 +96,7 @@ export function getNegativePostsByHourADay(
   return array;
 }
 
+//! MAKE IT 1 FUNCTION THAT RETURNS EVERY ARRAY
 export function getPositivePostsByHourADay(
   posts: [] | [StrongW2iseType],
   day: Date
@@ -123,5 +124,22 @@ export function getNeutralPostsByHourADay(
     if (post.sentimentScore === 0) array[index] += 1;
   });
 
+  return array;
+}
+//! --------------------------------------------------------------
+
+export function getSentimentScoreBar(posts: [] | [StrongW2iseType]) {
+  let map: { [key: string]: number } = {};
+  posts.forEach((post) => {
+    if (map.hasOwnProperty(post.sentimentScore.toString())) {
+      map[post.sentimentScore.toString()] += 1;
+    } else {
+      map[post.sentimentScore.toString()] = 1;
+    }
+  });
+  let array: [{ x: number; y: number }] = [{ x: 0, y: 0 }];
+  Object.keys(map).forEach((key) => {
+    array.push({ x: parseInt(key), y: map[key] });
+  });
   return array;
 }

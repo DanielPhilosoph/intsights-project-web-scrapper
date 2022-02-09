@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BarSentiment from "./BarSentiment/BarSentiment";
 import BarUploadPost from "./BarUploadPosts/BarUploadPosts";
 import "./analyticGraphs.css";
+import BarSentimentTotal from "./BarSentimentTotal/BarSentimentTotal";
 
 export default function AnalyticGraphs() {
   const [dateForStatistic, setDateForStatistic] = useState(new Date());
@@ -32,6 +33,12 @@ export default function AnalyticGraphs() {
         <Col>
           <BarSentiment date={dateForStatistic} />
         </Col>
+      </Row>
+      <Row>
+        <Col>
+          <BarSentimentTotal />
+        </Col>
+        <Col>2</Col>
       </Row>
     </Container>
   );

@@ -48,6 +48,12 @@ export default function BarUploadPost({ date }: props) {
   const options = {
     responsive: true,
     plugins: {
+      legend: {
+        labels: {
+          boxWidth: 11,
+          boxHeight: 11,
+        },
+      },
       title: {
         display: true,
         text: "Posts per hour " + formatDateTo_DD_MM_YYYY(date),

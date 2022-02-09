@@ -1,3 +1,5 @@
+import React from "react";
+import { useSelector } from "react-redux";
 import {
   Chart,
   PointElement,
@@ -9,21 +11,13 @@ import {
   Legend,
   Title,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { useSelector } from "react-redux";
 import {
-  getHours,
-  getNegativePostsByHourADay,
-  getPositivePostsByHourADay,
-  getNeutralPostsByHourADay,
-  formatDateTo_DD_MM_YYYY,
+  getNumbersArray,
+  getSentimentScoreBar,
 } from "../../../../helper/functions";
+import { Bar } from "react-chartjs-2";
 
-interface props {
-  date: Date;
-}
-
-export default function BarSentiment({ date }: props) {
+export default function BarSentimentTotal() {
   const state: StateType = useSelector((state: StateType) => state);
 
   Chart.register(
@@ -38,27 +32,14 @@ export default function BarSentiment({ date }: props) {
   );
 
   const data = {
-    labels: getHours(),
+    labels: getNumbersArray(-20, 21),
     datasets: [
       {
-        label: "Negative",
-        data: getNegativePostsByHourADay(state.data, date),
+        label: "Posts",
+        data: getSentimentScoreBar(state.data),
         borderWidth: 2,
-        backgroundColor: ["rgb(220,20,60)"],
-        borderColor: ["rgba(220,20,60, 0.5)"],
-      },
-      {
-        label: "Positive",
-        data: getPositivePostsByHourADay(state.data, date),
-        borderWidth: 2,
-        backgroundColor: ["rgb(0,128,0)"],
-        borderColor: ["rgba(0,128,0, 0.5)"],
-      },
-      {
-        label: "Neutral",
-        data: getNeutralPostsByHourADay(state.data, date),
-        borderWidth: 2,
-        backgroundColor: ["gray"],
+        backgroundColor: ["lightblue"],
+        borderColor: ["lightblue"],
       },
     ],
   };
@@ -72,9 +53,16 @@ export default function BarSentiment({ date }: props) {
           boxHeight: 11,
         },
       },
+      tooltip: {
+        callbacks: {
+          title: (context: any) => {
+            return "Score: " + context[0].label;
+          },
+        },
+      },
       title: {
         display: true,
-        text: "Sentiment per hour " + formatDateTo_DD_MM_YYYY(date),
+        text: "Sentiment score total ",
         padding: {
           top: 10,
         },
