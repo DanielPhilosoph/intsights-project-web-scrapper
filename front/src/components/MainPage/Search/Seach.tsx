@@ -7,6 +7,16 @@ import "./search.css";
 export default function Search() {
   const dispatch: Dispatch<any> = useDispatch();
   const searchInput = useRef<HTMLInputElement>(null);
+  function debounce(func: Function, timeout = 500) {
+    let timer: ReturnType<typeof setTimeout>;
+    return () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(null);
+      }, timeout);
+    };
+  }
+
   const search = () => {
     updateSearch(
       dispatch,
@@ -21,7 +31,7 @@ export default function Search() {
         type={"text"}
         className="searchInput"
         placeholder="Search..."
-        onChange={search}
+        onChange={debounce(() => search())}
       />
     </div>
   );
