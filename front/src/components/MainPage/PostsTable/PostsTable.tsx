@@ -12,8 +12,6 @@ export default function PostsTable() {
 
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
-  const pageCount = Math.ceil(state.data.length / postsPerPage);
-  console.log(pageCount);
 
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
@@ -21,6 +19,7 @@ export default function PostsTable() {
 
   let dataToRender: StrongW2iseType[];
   let tbodyRender;
+  let pageCount = 0;
 
   if (state.data) {
     //* Filler with the search param (from state)
@@ -30,8 +29,10 @@ export default function PostsTable() {
         post.content.toLowerCase().includes(state.search.toLowerCase())
     );
 
-    //? At first render, filter by date
+    //? Set page count for paginate
+    pageCount = Math.ceil(dataToRender.length / postsPerPage);
 
+    //? At first render, filter by date
     dataToRender = [
       ...dataToRender.sort((a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
