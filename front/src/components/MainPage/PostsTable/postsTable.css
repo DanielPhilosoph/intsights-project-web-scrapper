@@ -12,6 +12,10 @@
   width: 8%;
 }
 
+.postTableTh:hover {
+  background-color: rgb(223, 223, 223);
+}
+
 @media screen and (max-width: 500px) {
   .postTableDiv {
     width: 93%;
