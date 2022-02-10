@@ -4,6 +4,7 @@ import BarSentiment from "./BarSentiment/BarSentiment";
 import BarUploadPost from "./BarUploadPosts/BarUploadPosts";
 import "./analyticGraphs.css";
 import BarSentimentTotal from "./BarSentimentTotal/BarSentimentTotal";
+import CakeSection from "./CakeSection/CakeSection";
 
 export default function AnalyticGraphs() {
   const [dateForStatistic, setDateForStatistic] = useState(new Date());
@@ -37,6 +38,9 @@ export default function AnalyticGraphs() {
       <Row>
         <Col>
           <BarSentimentTotal />
+        </Col>
+        <Col>
+          <CakeSection />
         </Col>
       </Row>
     </Container>

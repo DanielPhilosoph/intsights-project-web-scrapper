@@ -26,7 +26,8 @@ export default function PostsTable() {
     dataToRender = state.data.filter(
       (post) =>
         post.title.toLowerCase().includes(state.search.toLowerCase()) ||
-        post.content.toLowerCase().includes(state.search.toLowerCase())
+        post.content.toLowerCase().includes(state.search.toLowerCase()) ||
+        post.section.toLowerCase().includes(state.search.toLowerCase())
     );
 
     //? Set page count for paginate
@@ -82,7 +83,6 @@ export default function PostsTable() {
           <tr>
             {state.data && state.data[0] !== undefined
               ? Object.keys(state.data[0]).map((key) => {
-                  //? Dont show sentimentScore
                   if (key === "sentimentScore") return "";
                   if (key === "id") return "";
                   return (

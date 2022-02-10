@@ -15,6 +15,7 @@ type StrongW2iseType = {
   date: string;
   sentimentScore: number;
   id: string;
+  section: string;
 };
 
 //* Data type

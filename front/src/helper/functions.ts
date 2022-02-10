@@ -115,3 +115,18 @@ export function getSentimentScoreBar(posts: [] | [StrongW2iseType]) {
   });
   return array;
 }
+
+export function getSectionsPercentage(
+  posts: [] | [StrongW2iseType],
+  labels: string[]
+) {
+  let amountArray = new Array(labels.length).fill(0);
+  posts.forEach((post) => {
+    labels.forEach((label, i) => {
+      if (post.section.toLowerCase() === label.toLowerCase()) {
+        amountArray[i] += 1;
+      }
+    });
+  });
+  return amountArray;
+}

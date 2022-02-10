@@ -65,7 +65,6 @@ export default function BarSentiment({ date }: props) {
   };
 
   const options = {
-    responsive: true,
     plugins: {
       legend: {
         labels: {

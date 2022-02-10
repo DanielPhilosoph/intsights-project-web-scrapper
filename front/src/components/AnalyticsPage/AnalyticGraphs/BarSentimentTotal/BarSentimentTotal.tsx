@@ -45,7 +45,6 @@ export default function BarSentimentTotal() {
   };
 
   const options = {
-    responsive: true,
     plugins: {
       legend: {
         labels: {

@@ -25,6 +25,7 @@ async function getPostByType(type) {
         date: post.date,
         sentimentScore: post.sentimentScore,
         id: post._id,
+        section: post.section,
       };
     });
     return arrangedPosts;
