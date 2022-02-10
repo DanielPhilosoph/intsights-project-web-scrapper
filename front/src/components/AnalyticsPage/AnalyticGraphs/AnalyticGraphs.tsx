@@ -38,7 +38,6 @@ export default function AnalyticGraphs() {
         <Col>
           <BarSentimentTotal />
         </Col>
-        <Col>2</Col>
       </Row>
     </Container>
   );

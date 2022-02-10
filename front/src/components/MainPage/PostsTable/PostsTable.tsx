@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./postsTable.css";
 import ReactPaginate from "react-paginate";
@@ -70,6 +70,13 @@ export default function PostsTable() {
 
   return (
     <div className="postTableDiv">
+      {state.data && state.data.length === 0 ? (
+        <Spinner animation="border" className="loader" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : (
+        ""
+      )}
       <Table className="postTable" striped bordered hover responsive="xl">
         <thead>
           <tr>

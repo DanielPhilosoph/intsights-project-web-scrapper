@@ -54,6 +54,13 @@
   background-color: rgb(156, 156, 156);
 }
 
+.loader {
+  height: 70px;
+  width: 70px;
+  display: flex;
+  margin: auto;
+}
+
 @media screen and (max-width: 500px) {
   .pagination a {
     padding: 6px;
