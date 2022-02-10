@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./postsTable.css";
 import ReactPaginate from "react-paginate";
 
-import { formatDate } from "../../../helper/functions";
+import { capitalizeFirstLetter, formatDate } from "../../../helper/functions";
 
 export default function PostsTable() {
   const state: StateType = useSelector((state: StateType) => state);
@@ -87,7 +87,7 @@ export default function PostsTable() {
                   if (key === "id") return "";
                   return (
                     <th key={key} className="postTableTh">
-                      {key}
+                      {capitalizeFirstLetter(key)}
                     </th>
                   );
                 })

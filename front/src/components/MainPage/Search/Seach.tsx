@@ -7,6 +7,7 @@ import "./search.css";
 export default function Search() {
   const dispatch: Dispatch<any> = useDispatch();
   const searchInput = useRef<HTMLInputElement>(null);
+
   function debounce(func: Function, timeout = 500) {
     let timer: ReturnType<typeof setTimeout>;
     return () => {

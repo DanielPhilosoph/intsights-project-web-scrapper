@@ -13,7 +13,9 @@ import {
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+
 import { getSectionsPercentage } from "../../../../helper/functions";
+import "./cakeSection.css";
 
 export default function CakeSection() {
   const state: StateType = useSelector((state: StateType) => state);
@@ -47,12 +49,12 @@ export default function CakeSection() {
         label: "My First Dataset",
         data: getSectionsPercentage(state.data, labels),
         backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-          "gray",
-          "blue",
-          "lightblue",
+          "#9DBBF7",
+          "#008DC0",
+          "#00C0B3",
+          "#00C06D",
+          "#3574F0",
+          "#EF2525",
           "black",
         ],
         hoverOffset: 4,
@@ -64,7 +66,19 @@ export default function CakeSection() {
   const options = {
     responsive: true,
     plugins: {
+      tooltip: {
+        callbacks: {
+          title: (context: any) => {
+            return context[0].label;
+          },
+          label: (context: any) => {
+            return "Posts: " + context.formattedValue;
+          },
+        },
+      },
       legend: {
+        maxHeight: 10,
+        fullSize: false,
         position: right,
         labels: {
           boxWidth: 11,
@@ -82,8 +96,8 @@ export default function CakeSection() {
   };
 
   return (
-    <div style={{ width: "53%", margin: "auto" }}>
-      <Doughnut data={data} options={options}></Doughnut>;
+    <div className="doughnutDiv">
+      <Doughnut data={data} options={options}></Doughnut>
     </div>
   );
 }

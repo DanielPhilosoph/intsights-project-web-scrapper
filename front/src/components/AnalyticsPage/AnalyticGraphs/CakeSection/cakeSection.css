@@ -1,0 +1,11 @@
+.doughnutDiv {
+  width: 53%;
+  margin: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .doughnutDiv {
+    width: 75%;
+    margin: auto;
+  }
+}
