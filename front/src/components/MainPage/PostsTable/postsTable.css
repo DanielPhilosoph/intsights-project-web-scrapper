@@ -3,12 +3,22 @@
   margin: auto;
 }
 
+.showMoreLessButton {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  font-family: arial, sans-serif;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
 .tbodyTDSpan {
   white-space: pre-line;
 }
 
 .postTableTh {
-  cursor: pointer;
   width: 8%;
 }
 

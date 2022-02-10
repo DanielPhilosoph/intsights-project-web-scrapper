@@ -4,17 +4,41 @@ import { useSelector } from "react-redux";
 import "./postsTable.css";
 import ReactPaginate from "react-paginate";
 
-import { capitalizeFirstLetter, formatDate } from "../../../helper/functions";
+import {
+  capitalizeFirstLetter,
+  formatDate,
+  isString,
+} from "../../../helper/functions";
 
 export default function PostsTable() {
   const state: StateType = useSelector((state: StateType) => state);
   const [pageNumber, setPageNumber] = useState(0);
 
+  //* Paging logic
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
 
+  //* Consts
+  const SHOW_MORE_LENGTH = 150;
+
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
+  };
+
+  const showMoreOrLess = (event: any, more: string) => {
+    if (event.target) {
+      event.target.textContent =
+        event.target.textContent === "Show more" ? "Show less" : "Show more";
+      if (event.target.textContent === "Show less") {
+        event.target.parentNode.childNodes[0].textContent += more;
+      } else {
+        event.target.parentNode.childNodes[0].textContent =
+          event.target.parentNode.childNodes[0].textContent.substring(
+            0,
+            SHOW_MORE_LENGTH
+          );
+      }
+    }
   };
 
   let dataToRender: StrongW2iseType[];
@@ -57,6 +81,26 @@ export default function PostsTable() {
               tdValue = formattedDate !== undefined ? formattedDate : post[key];
             } else {
               tdValue = values[i];
+            }
+            if (key === "content") {
+              let value = values[i];
+              if (isString(value) && value.length > SHOW_MORE_LENGTH) {
+                const shorten = value.substring(0, SHOW_MORE_LENGTH);
+                const more = value.substring(SHOW_MORE_LENGTH + 1);
+                return (
+                  <td key={post.id + i}>
+                    <span className="tbodyTDSpan">
+                      <span>{shorten}</span>
+                      <button
+                        className="showMoreLessButton"
+                        onClick={(event) => showMoreOrLess(event, more)}
+                      >
+                        Show more
+                      </button>
+                    </span>
+                  </td>
+                );
+              }
             }
             return (
               <td key={post.id + i}>
