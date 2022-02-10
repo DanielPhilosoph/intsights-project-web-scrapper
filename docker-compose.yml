@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  proxy-docker:
+    image: dperson/torproxy:latest
+    container_name: tor-proxy
+    restart: always
+    ports:            
+      - 8118:8118
+    expose:
+      - 8118
+  server-scrapper:
+    build: "./back"
+    ports:
+      - "3004:3004"    
+  ui:
+    build: "./front"
+    ports:
+      - "3000:3000"
+  
+  
+# COMMAND
+# docker-compose up --build

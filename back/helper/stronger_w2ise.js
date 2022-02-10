@@ -5,14 +5,18 @@ const cheerio = require("cheerio");
 
 const { getPostByType, addPosts } = require("../mongo/functions/queries");
 
-const agent = new SocksProxyAgent("socks5h://127.0.0.1:9050");
+// const agent = new SocksProxyAgent("socks5h://127.0.0.1:9050");
+const proxy = {
+  host: "tor-proxy",
+  port: 8118,
+};
 
 const getStrongW2iseInfo = async function () {
   try {
     //? Axios request
     let body = await axios.get(
       "http://strongerw2ise74v3duebgsvug4mehyhlpa7f6kfwnas7zofs3kov7yd.onion/all",
-      { httpAgent: agent }
+      { proxy }
     );
 
     //? get all data from db
