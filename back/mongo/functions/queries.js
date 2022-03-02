@@ -9,7 +9,7 @@ async function addPosts(posts) {
     await Post.insertMany(posts, { ordered: true });
     return true;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return false;
   }
 }
@@ -30,7 +30,7 @@ async function getPostByType(type) {
     });
     return arrangedPosts;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return [];
   }
 }
