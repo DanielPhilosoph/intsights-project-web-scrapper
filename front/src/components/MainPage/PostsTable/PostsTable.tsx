@@ -4,11 +4,7 @@ import { useSelector } from "react-redux";
 import "./postsTable.css";
 import ReactPaginate from "react-paginate";
 
-import {
-  capitalizeFirstLetter,
-  formatDate,
-  isString,
-} from "../../../helper/functions";
+import { capitalizeFirstLetter, formatDate, isString } from "../../../helper/functions";
 
 export default function PostsTable() {
   const state: StateType = useSelector((state: StateType) => state);
@@ -33,10 +29,7 @@ export default function PostsTable() {
         event.target.parentNode.childNodes[0].textContent += more;
       } else {
         event.target.parentNode.childNodes[0].textContent =
-          event.target.parentNode.childNodes[0].textContent.substring(
-            0,
-            SHOW_MORE_LENGTH
-          );
+          event.target.parentNode.childNodes[0].textContent.substring(0, SHOW_MORE_LENGTH);
       }
     }
   };
@@ -57,7 +50,7 @@ export default function PostsTable() {
     //? Set page count for paginate
     pageCount = Math.ceil(dataToRender.length / postsPerPage);
 
-    //? At first render, filter by date
+    //? At first render, sort by date
     dataToRender = [
       ...dataToRender.sort((a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
