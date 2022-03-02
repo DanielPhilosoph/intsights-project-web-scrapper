@@ -44,6 +44,7 @@ function getSection(post) {
     "drugs",
     "anxiety",
     "pain killer",
+    "weed",
     "oxycontin",
     "morphine",
     "ritalin",

@@ -10,6 +10,7 @@ import { updateData } from "./reduxActions/actions";
 import AnalyticsPage from "./components/AnalyticsPage/AnalyticsPage";
 
 const REFRESH_TIME_MS = 120000;
+const URL = "http://localhost:3004/strongW2ise";
 
 function App() {
   const dispatch: Dispatch<any> = useDispatch();
@@ -17,7 +18,9 @@ function App() {
   useEffect(() => {
     async function getPosts() {
       try {
-        const response = await axios.get("http://localhost:3004/strongW2ise");
+        const response = await axios.get(URL);
+        console.log(response.data.data);
+
         updateData(dispatch, response.data.data);
       } catch (error) {
         console.log(error);
@@ -28,7 +31,7 @@ function App() {
     setInterval(async () => {
       async function x() {
         try {
-          const response = await axios.get("http://localhost:3004/strongW2ise");
+          const response = await axios.get(URL);
           updateData(dispatch, response.data.data);
           console.log("updated");
         } catch (error) {
